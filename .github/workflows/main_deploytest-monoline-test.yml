@@ -12,12 +12,12 @@ on:
       GIT_FunctionApp_Name:
         description: 'Provide the Function App Name'
         required: true
-        default: 'devops-test-srs'
+        default: 'functionappsrs'
         
       GIT_FunctionApp_URL:
         description: 'Provide the Function App URL'
         required: true
-        default: 'https://devops-test-srs.azurewebsites.net'
+        default: 'https://functionappsrs.azurewebsites.net'
         
        # This is the path of your Function app in Git.
       GIT_FunctionApp_PATH:
@@ -39,20 +39,14 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-
-      #- name: Create and start virtual environment
-        #run: |
-          #python -m venv venv
-          #source venv/bin/activate
-
+      
+      #Install All the Required Depenedent Modules
       - name: Install dependencies
         run: |
           pushd $GITHUB_WORKSPACE/${{ github.event.inputs.GIT_FunctionApp_PATH }}
           pip install -r requirements.txt --target=".python_packages/lib/site-packages"
           popd
         
-      # Optional: Add step to run tests here
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
