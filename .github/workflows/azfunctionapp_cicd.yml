@@ -23,7 +23,7 @@ on:
       GIT_FunctionApp_PATH:
         description: 'Relative path for Function'
         required: true
-        default: '/FunctionApps/monoline/'
+        default: '/FunctionApp/DemoSample/'
 
 jobs:
   build:
